@@ -5,7 +5,6 @@ type ModalType = {
   children: React.ReactNode;
   isOpened: boolean;
   setIsOpened: (isOpened: boolean) => void;
-  display?: boolean;
 };
 
 export const ModalWindow: React.FC<ModalType> = ({
