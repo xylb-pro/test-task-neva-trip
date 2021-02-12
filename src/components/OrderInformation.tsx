@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react-lite';
-import moment from 'moment';
 import React from 'react';
 import styled from 'styled-components';
 import store, { routeType } from '../store';
@@ -27,8 +26,8 @@ export const OrderInformation: React.FC = observer(() => {
     } else {
       city1 = store.currentCities[0];
       city2 = store.currentCities[1];
+      if (route === 'AtoBtoA') back = ' и обратно';
     }
-    if (route === 'AtoBtoA') back = ' и обратно';
 
     return (
       <>

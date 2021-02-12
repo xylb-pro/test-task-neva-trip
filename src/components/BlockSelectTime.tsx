@@ -3,6 +3,7 @@ import moment from 'moment';
 import React from 'react';
 import styled from 'styled-components';
 import store, { routeType } from '../store';
+import { ContentContainer, MainContainer } from './BlockSelectRoute';
 
 interface IBlockSelectTime {
   route: routeType;
@@ -82,17 +83,6 @@ export const getNormalizeTime = (date: string) => {
   if (hours.length < 2) hours = '0' + hours;
   return `${hours}:${minutes}`;
 };
-
-const MainContainer = styled.div`
-  max-width: 900px;
-  display: flex;
-  margin: 0 auto;
-  padding: 100px 0px 50px 0px;
-`;
-const ContentContainer = styled.div`
-  margin: 0 auto;
-  display: flex;
-`;
 
 const LabelContainer = styled.div`
   padding-right: 40px;

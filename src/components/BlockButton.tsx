@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ContentContainer, MainContainer } from './BlockSelectRoute';
 
 export const BlockButton: React.FC = () => {
   return (
@@ -12,16 +13,6 @@ export const BlockButton: React.FC = () => {
     </MainContainer>
   );
 };
-const MainContainer = styled.div`
-  max-width: 900px;
-  display: flex;
-  margin: 0 auto;
-  padding: 100px 0px 50px 0px;
-`;
-const ContentContainer = styled.div`
-  margin: 0 auto;
-  display: flex;
-`;
 const ButtonBlock = styled.button`
   font-family: 'Ubuntu', sans-serif;
   font-size: 18px;

@@ -5,8 +5,6 @@ type ModalType = {
   children: React.ReactNode;
   isOpened: boolean;
   setIsOpened: (isOpened: boolean) => void;
-  maxWidth?: string;
-  padding?: string;
   display?: boolean;
 };
 
@@ -14,8 +12,6 @@ export const ModalWindow: React.FC<ModalType> = ({
   children,
   isOpened,
   setIsOpened,
-  maxWidth,
-  padding = '24px',
 }) => {
   return (
     <>
@@ -24,11 +20,7 @@ export const ModalWindow: React.FC<ModalType> = ({
           onMouseDown={() => setIsOpened(false)}
           backdrop={isOpened ? 'blur(15px)' : 'blur(0px)'}
         >
-          <ModalContent
-            onMouseDown={(e) => e.stopPropagation()}
-            width={maxWidth}
-            padding={padding}
-          >
+          <ModalContent onMouseDown={(e) => e.stopPropagation()}>
             <CloseIcon onClick={() => setIsOpened(false)}>X</CloseIcon>
             {children}
           </ModalContent>
@@ -52,13 +44,11 @@ const ModalWrapper = styled.div<{ backdrop?: string }>`
   transition: backdrop-filter 10s ease 10s;
 `;
 
-const ModalContent = styled.div<{ width?: string; padding?: string }>`
+const ModalContent = styled.div`
   position: relative;
   background-color: #ffffff;
   border-radius: 20px;
-  max-width: ${(props) => props.width};
-  width: ${(props) => props.width};
-  padding: ${(props) => props.padding};
+  padding: 50px;
   box-shadow: 0px 8px 29px rgba(0, 0, 0, 0.4);
 `;
 

@@ -1,5 +1,4 @@
 import { makeAutoObservable } from 'mobx';
-import moment from 'moment';
 
 export type priceType = 'oneWay' | 'twoWay';
 export type routeType = 'AtoB' | 'BtoA' | 'AtoBtoA' | string;

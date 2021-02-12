@@ -33,13 +33,13 @@ export const BlockSelectRoute: React.FC = observer(() => {
   );
 });
 
-const MainContainer = styled.div`
+export const MainContainer = styled.div`
   max-width: 900px;
   display: flex;
   margin: 0 auto;
   padding: 100px 0px 50px 0px;
 `;
-const ContentContainer = styled.div`
+export const ContentContainer = styled.div`
   margin: 0 auto;
   display: flex;
 `;

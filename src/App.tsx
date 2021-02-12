@@ -6,7 +6,6 @@ import { BlockButton } from './components/BlockButton';
 import store from './store';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
-import moment from 'moment';
 import { ModalWindow } from './components/ModalWindow';
 import { OrderInformation } from './components/OrderInformation';
 
@@ -34,11 +33,7 @@ const App = observer(() => {
       )}
       <BlockSelectTickets />
       <BlockButton />
-      <ModalWindow
-        setIsOpened={() => setIsOpened(false)}
-        isOpened={isOpened}
-        padding="50px"
-      >
+      <ModalWindow setIsOpened={() => setIsOpened(false)} isOpened={isOpened}>
         <OrderInformation />
       </ModalWindow>
     </form>

@@ -1,11 +1,12 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import store from '../store';
+import { ContentContainer, MainContainer } from './BlockSelectRoute';
 export const BlockSelectTickets: React.FC = observer(() => {
   return (
     <MainContainer>
-      <ContentContainer>
+      <ContentContainer style={{ display: 'block' }}>
         <LabelContainer>
           <LabelText>Введите количество билетов</LabelText>
         </LabelContainer>
@@ -22,15 +23,6 @@ export const BlockSelectTickets: React.FC = observer(() => {
   );
 });
 
-const MainContainer = styled.div`
-  max-width: 900px;
-  display: flex;
-  margin: 0 auto;
-  padding: 100px 0px 50px 0px;
-`;
-const ContentContainer = styled.div`
-  margin: 0 auto;
-`;
 const LabelContainer = styled.div``;
 const LabelText = styled.label`
   font-size: 20px;
