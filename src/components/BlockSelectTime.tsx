@@ -32,7 +32,7 @@ export const BlockSelectTime: React.FC<IBlockSelectTime> = observer(
           if (store.currentRoute === 'AtoBtoA') {
             returnedArr = store.schedule.filter(
               (element) =>
-                Number(new Date(element.time)) >
+                Number(new Date(element.time)) >=
                   Number(new Date(store.currentTime)) +
                     1000 * 60 * store.timeToTravel &&
                 element.route === selectedRoute
