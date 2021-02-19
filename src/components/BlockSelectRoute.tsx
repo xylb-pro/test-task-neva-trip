@@ -12,9 +12,9 @@ export const BlockSelectRoute: React.FC = observer(() => {
         </LabelContainer>
         <ContentSelector
           onChange={(e) => {
-            store.setCurrentRoute(e.target.value);
-            store.setCurrentTime('2021-08-21 18:00:00');
+            store.setCurrentTime('');
             store.setCurrentTimeBack('');
+            store.setCurrentRoute(e.target.value);
           }}
         >
           <SelectorOption value={store.routes[0]}>

@@ -12,8 +12,9 @@ export const BlockSelectTickets: React.FC = observer(() => {
         </LabelContainer>
         <InputContainer>
           <InputField
-            type="text"
-            maxLength={2}
+            type="number"
+            max="99"
+            min="1"
             onChange={(e) => store.setCurrentTickets(+e.target.value)}
             required
           />
@@ -28,7 +29,7 @@ const LabelText = styled.label`
   font-size: 20px;
 `;
 const InputContainer = styled.div`
-  width: 50px;
+  max-width: 80px;
   margin: 20px auto 0px;
 `;
 const InputField = styled.input`

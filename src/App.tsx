@@ -5,15 +5,13 @@ import { BlockSelectRoute } from './components/BlockSelectRoute';
 import { BlockButton } from './components/BlockButton';
 import store from './store';
 import { observer } from 'mobx-react-lite';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ModalWindow } from './components/ModalWindow';
 import { OrderInformation } from './components/OrderInformation';
 
 const App = observer(() => {
   const [isOpened, setIsOpened] = useState(false);
-  useEffect(() => {
-    store.setCurrentTimeZone(new Date().getTimezoneOffset() + 180);
-  }, []);
+
   return (
     <form
       id="calculateCost"

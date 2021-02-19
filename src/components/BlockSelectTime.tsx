@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
-import moment from 'moment';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import store, { routeType } from '../store';
+import store, { routeType, scheduleType } from '../store';
+import { getHumanizeDateAndTime } from '../utils/timeAndWordEnding';
 import { ContentContainer, MainContainer } from './BlockSelectRoute';
 
 interface IBlockSelectTime {
@@ -14,51 +14,73 @@ export const BlockSelectTime: React.FC<IBlockSelectTime> = observer(
     const renderOptions = (key: number, el: string) => {
       return (
         <SelectorOption key={key} value={el}>
-          {getNormalizeTime(el)}
+          {getHumanizeDateAndTime(el)}
         </SelectorOption>
       );
     };
 
     const getSchedule = (selectedRoute: routeType) => {
-      return (
-        <ContentSelector
-          onChange={(e) => {
-            if (route === 'BtoA' && store.currentRoute === 'AtoBtoA') {
-              store.setCurrentTimeBack(e.target.value);
-            } else if (store.currentRoute === 'AtoBtoA') {
-              if (moment(store.currentTime).isAfter(e.target.value)) {
-                store.setCurrentTime(e.target.value);
-              } else {
-                store.setCurrentTime(e.target.value);
-                store.setCurrentTimeBack('');
-              }
-            } else {
-              store.setCurrentTimeBack('');
+      let returnedArr: scheduleType = [];
+
+      switch (selectedRoute) {
+        case 'AtoB':
+          returnedArr = store.schedule.filter((element) => {
+            return element.route === selectedRoute;
+          });
+          break;
+        case 'BtoA':
+          if (store.currentRoute === 'AtoBtoA') {
+            returnedArr = store.schedule.filter(
+              (element) =>
+                Number(new Date(element.time)) >
+                  Number(new Date(store.currentTime)) +
+                    1000 * 60 * store.timeToTravel &&
+                element.route === selectedRoute
+            );
+          } else {
+            returnedArr = store.schedule.filter(
+              (element) => element.route === selectedRoute
+            );
+          }
+          break;
+      }
+
+      if (selectedRoute === 'AtoB') {
+        return (
+          <ContentSelector
+            onChange={(e) => {
               store.setCurrentTime(e.target.value);
+            }}
+            required
+            value={store.currentTime}
+          >
+            <SelectorOption key={-1} value="" />
+            {returnedArr.map((element, idx) => {
+              return renderOptions(idx, element.time);
+            })}
+          </ContentSelector>
+        );
+      } else
+        return (
+          <ContentSelector
+            onChange={(e) => {
+              if (selectedRoute === 'BtoA' && store.currentRoute === 'BtoA') {
+                store.setCurrentTime(e.target.value);
+              } else store.setCurrentTimeBack(e.target.value);
+            }}
+            required
+            value={
+              store.currentRoute === 'BtoA'
+                ? store.currentTime
+                : store.currentTimeBack
             }
-          }}
-        >
-          {store.schedule[selectedRoute].map((el, i) => {
-            if (
-              moment(el).isAfter(
-                moment(store.currentTime).add(50, 'minutes')
-              ) &&
-              store.currentRoute === 'AtoBtoA' &&
-              route === 'BtoA'
-            ) {
-              if (store.currentTimeBack === '') {
-                store.setCurrentTimeBack(el);
-              }
-              return renderOptions(i, el);
-            } else if (store.currentRoute !== 'AtoBtoA' || route === 'AtoB') {
-              if (store.currentRoute === 'BtoA' && i === 0) {
-                store.setCurrentTime(el);
-              }
-              return renderOptions(i, el);
-            }
-          })}
-        </ContentSelector>
-      );
+          >
+            <SelectorOption key={-1} value="" />
+            {returnedArr.map((element, idx) => {
+              return renderOptions(idx, element.time);
+            })}
+          </ContentSelector>
+        );
     };
 
     return (
@@ -74,15 +96,6 @@ export const BlockSelectTime: React.FC<IBlockSelectTime> = observer(
     );
   }
 );
-
-export const getNormalizeTime = (date: string) => {
-  let currentDate = moment(date).add(store.currentTimeZone, 'minutes');
-  let hours: string = currentDate.hours().toString();
-  let minutes: string = currentDate.minutes().toString();
-  if (minutes.length < 2) minutes = '0' + minutes;
-  if (hours.length < 2) hours = '0' + hours;
-  return `${hours}:${minutes}`;
-};
 
 const LabelContainer = styled.div`
   padding-right: 40px;
