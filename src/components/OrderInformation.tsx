@@ -9,6 +9,10 @@ import {
 } from '../utils/timeAndWordEnding';
 
 export const OrderInformation: React.FC = observer(() => {
+  /**
+   * Correct display of direction depending on cities and route
+   * @param route - Selected route
+   */
   const way = (route: routeType) => {
     let city1,
       city2,
@@ -21,7 +25,6 @@ export const OrderInformation: React.FC = observer(() => {
       city2 = store.currentCities[1];
       if (route === 'AtoBtoA') back = ' и обратно';
     }
-
     return (
       <>
         Вы выбрали {ticketsOutput(store.currentTickets)} по маршруту из г.

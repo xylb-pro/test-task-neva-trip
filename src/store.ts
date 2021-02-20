@@ -8,7 +8,6 @@ export type scheduleType = { id: number; time: string; route: routeType }[];
 class Store {
   currentRoute: routeType = 'AtoB';
   currentTickets: number = 0;
-  currentTimeZone: number = 0;
   currentTime: string = '';
   currentTimeBack: string = '';
   cities: citiesType[] = ['Санкт-Петербург', 'Сыктывкар'];
@@ -48,9 +47,6 @@ class Store {
   }
   setCurrentTickets(amount: number) {
     this.currentTickets = amount;
-  }
-  setCurrentTimeZone(z: number) {
-    this.currentTimeZone = z;
   }
   setCurrentTime(time: string) {
     this.currentTime = time;

@@ -11,6 +11,11 @@ interface IBlockSelectTime {
 
 export const BlockSelectTime: React.FC<IBlockSelectTime> = observer(
   ({ route }) => {
+    /**
+     * Rendering a select list item
+     * @param key - Key
+     * @param el - Time in correct format
+     */
     const renderOptions = (key: number, el: string) => {
       return (
         <SelectorOption key={key} value={el}>
@@ -19,6 +24,10 @@ export const BlockSelectTime: React.FC<IBlockSelectTime> = observer(
       );
     };
 
+    /**
+     * Displaying the correct timetable for ships
+     * @param selectedRoute
+     */
     const getSchedule = (selectedRoute: routeType) => {
       let returnedArr: scheduleType = [];
 

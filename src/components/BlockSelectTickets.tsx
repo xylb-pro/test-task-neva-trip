@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import store from '../store';
 import { ContentContainer, MainContainer } from './BlockSelectRoute';
+
 export const BlockSelectTickets: React.FC = observer(() => {
   return (
     <MainContainer>

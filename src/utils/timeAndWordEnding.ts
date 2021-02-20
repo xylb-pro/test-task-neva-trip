@@ -1,7 +1,14 @@
+/**
+ * Adds the second digit to the number as needed. (if the number is not two-digit)
+ */
 export const twoDigitsNumbers = (number: number): string => {
   return number < 10 ? '0' + number : String(number);
 };
-
+/**
+ * Calculation of time in the client's time zone
+ * @param date - dd/MM/YYYY HH:mm format
+ * @param duration - duration of trip
+ */
 export const getHumanizeDateAndTime = (
   date: string,
   duration?: number
@@ -25,11 +32,21 @@ export const getHumanizeDateAndTime = (
   }
   return `${days}/${months}/${years} ${hours}:${minutes}`;
 };
-
+/**
+ * Arrival time calculation
+ * @param time - departure time
+ * @param duration - duration of trip
+ */
 export const getArrivalTime = (time: string, duration: number) => {
   return new Date(+new Date(time) + duration);
 };
 
+/**
+ * Total travel time calculation
+ * @param dateStart - Departure time from the first city
+ * @param dateEnd - Departure time from the second city
+ * @param duration - Duration of trip
+ */
 export const getTimeToTravel = (
   dateStart: string,
   dateEnd: string,
@@ -41,9 +58,13 @@ export const getTimeToTravel = (
   let minutes = Math.trunc((duration / 1000 / 60) % 60);
   if (hours === 1) return `${hours} час ${minutes} минут`;
   if (hours > 4) return `${hours} часов ${minutes} минут`;
-  if (hours > 1) return `${hours} часа ${minutes} минут`;
+  else return `${hours} часа ${minutes} минут`;
 };
 
+/**
+ * The correct format for writing the number of tickets
+ * @param count - Number of tickets
+ */
 export const ticketsOutput = (count: number) => {
   let result = '';
   let count10 = count % 10;
